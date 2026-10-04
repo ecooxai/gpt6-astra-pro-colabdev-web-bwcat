@@ -1,0 +1,13 @@
+{
+  "min": [
+    -1.0180158730476134,
+    0.0010196281257246476,
+    -2.3909850120544434
+  ],
+  "max": [
+    0.8100705146789551,
+    2.8975677924050443,
+    1.6045992900325379
+  ],
+  "source": "Actual world-space bounds of the loaded original cat, including fur and whiskers."
+}

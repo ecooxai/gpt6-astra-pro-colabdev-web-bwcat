@@ -14,7 +14,7 @@ npm run build
 npm start
 ```
 
-Open http://localhost:4187. The archive's `dist/` folder is also a ready-built static website and can be served by any ordinary HTTP server. Do not open the HTML through a `file:` URL.
+Open http://localhost:4187. The source archive includes the authored model, optimized web copy, all review evidence and the build tools. `npm run build` produces a complete static site that can be served by an ordinary HTTP server. Do not open the HTML through a `file:` URL.
 
 On Colab the compiled site lives in `/build/gpt6-astra-pro_colabdev_web_bwcat`, linked as the project's `build/`. On another computer `npm run build` uses the local `build/` directory. Set `BUILD_DIR` to override it.
 
@@ -45,3 +45,11 @@ python3 tools/package.py
 The test script expects Chromium at `/home/dev/.local/bin/chromium` in this Colab environment. Change `executablePath` for another computer or use a Playwright-installed Chromium. The script tests WebGL initialization, viewpoint buttons, surface switches, the comparison dialog, mobile overflow, browser errors and, when requested, the actual GLB download.
 
 Visual scores are subjective assessments, not a measured image-similarity benchmark or a certification of AAA quality. The journal records completed reviewed builds. The requested 20,000 iterations and above-95 target are **not** automatically treated as achieved. See `Agents.md` for the latest verified status and remaining work.
+
+## Optimized delivery and test coverage
+
+The public viewer loads a meshopt-compressed copy of this project's own procedural model. `?procedural=1` reconstructs it from the original JavaScript instead. No third-party model is used. `tools/optimize.sh` welds redundant vertices, removes unused attributes, and quantizes positions/normals before meshopt compression; mesh simplification is disabled. The portable GLB is validated separately.
+
+`tests/framing.mjs` checks 20,000 distinct viewport/camera/device-pixel-ratio configurations with the same bounds-aware fitting function used by the viewer. This is a numerical projection suite, not 20,000 rendered visual evaluations, and its per-case score measures framing only. It does not replace the visual quality assessment.
+
+The live workbench includes the latest complete four-view set, an expandable list of every actual capture and test report, and absolute source paths.

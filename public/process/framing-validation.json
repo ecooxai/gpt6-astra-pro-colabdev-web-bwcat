@@ -1,0 +1,24 @@
+{
+  "cases": 20000,
+  "passed": 20000,
+  "failed": 0,
+  "baselineClipped": 1156,
+  "minNormalizedMargin": 0.12437810945273575,
+  "durationMs": 384.735901,
+  "modelBounds": {
+    "min": [
+      -1.0180158730476134,
+      0.0010196281257246476,
+      -2.3909850120544434
+    ],
+    "max": [
+      0.8100705146789551,
+      2.8975677924050443,
+      1.6045992900325379
+    ],
+    "source": "Actual world-space bounds of the loaded original cat, including fur and whiskers."
+  },
+  "method": "20,000 distinct camera/viewport/DPR configurations are constructed and numerically projected using the same fitting helper as the live viewer. No reference pixels are inspected. These are computational projection tests, not 20,000 rendered or manually reviewed visual iterations.",
+  "scoreMeaning": "Each per-case score measures framing constraints only. It is not a reference-similarity score or an AAA quality rating.",
+  "failures": []
+}
