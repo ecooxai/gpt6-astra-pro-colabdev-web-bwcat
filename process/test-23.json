@@ -1,0 +1,72 @@
+{
+  "iteration": 23,
+  "time": "2026-10-04T17:42:46.800Z",
+  "stats": {
+    "triangles": 678708,
+    "drawCalls": 29,
+    "geometries": 32,
+    "textures": 6,
+    "buildMs": 7510.199999999953,
+    "initializationMs": 7510.199999999953,
+    "navigationToReadyMs": 19033.59999999986,
+    "loadingMethod": "procedural",
+    "bounds": {
+      "min": [
+        -0.9788631200790405,
+        -0.014576227404177189,
+        -2.5196986198425293
+      ],
+      "max": [
+        0.8100705146789551,
+        2.6480698585510254,
+        1.6105197668075562
+      ]
+    },
+    "frames": 9,
+    "view": "three",
+    "webgl": "WebGL2"
+  },
+  "checks": [
+    {
+      "test": "WebGL scene loads",
+      "pass": true
+    },
+    {
+      "test": "front camera button",
+      "pass": true
+    },
+    {
+      "test": "left camera button",
+      "pass": true
+    },
+    {
+      "test": "right camera button",
+      "pass": true
+    },
+    {
+      "test": "back camera button",
+      "pass": true
+    },
+    {
+      "test": "Fur toggle",
+      "pass": true
+    },
+    {
+      "test": "Mesh inspection",
+      "pass": true
+    },
+    {
+      "test": "Reference comparison dialog",
+      "pass": true
+    },
+    {
+      "test": "Mobile has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "test": "No browser exceptions",
+      "pass": true
+    }
+  ],
+  "errors": []
+}
