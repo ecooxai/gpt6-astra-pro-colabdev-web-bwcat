@@ -1,10 +1,26 @@
 {
-  "revision": "2026-10-04T11:32:53.828728+00:00",
-  "iterations": 2,
-  "score": 68.0,
+  "revision": "2026-10-04T11:40:59.024233+00:00",
+  "iterations": 4,
+  "score": 82.0,
   "projectPath": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat",
-  "note": "Review 2: 68/100. The iris and ear defects are corrected. The eyes still protrude too much, the tail is too pointed, and the shoulder marking needs a white collar gap. Scores are subjective visual assessments, not measured reference similarity.",
+  "note": "Review 4: 82/100. The back of the head is corrected, the stance has four distinct paws, and orthographic views are available. Eye size and glare remain too toy-like; ear folds and the tail tip need refinement. Scores are subjective visual assessments, not measured reference similarity.",
   "reviews": [
+    {
+      "iteration": 4,
+      "title": "04 \u00b7 Four-sided anatomy and corneal detail",
+      "score": 82.0,
+      "image": "process/iteration-04-three.png",
+      "note": "The back of the head is corrected, the stance has four distinct paws, and orthographic views are available. Eye size and glare remain too toy-like; ear folds and the tail tip need refinement.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-04-three.png"
+    },
+    {
+      "iteration": 3,
+      "title": "03 \u00b7 Inset eyes and a softer coat",
+      "score": 77.0,
+      "image": "process/iteration-03-three.png",
+      "note": "Eye integration and fur density are improved. The rear inspection exposed an incorrect white skull patch; profile checks also need orthographic cameras and a clearer four-paw stance.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-03-three.png"
+    },
     {
       "iteration": 2,
       "title": "02 \u00b7 Golden eyes and folded ears",
@@ -22,5 +38,5 @@
       "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-01-three.png"
     }
   ],
-  "updated": "2026-10-04 11:32 UTC"
+  "updated": "2026-10-04 11:40 UTC"
 }

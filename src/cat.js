@@ -16,10 +16,10 @@ function coat(p,kind='body'){
   const p3=((z+.42)/.20)**2+((y-.68)/.19)**2+((a-.39)/.22)**2;
   b=Math.max(1-smooth(.94+n,1.04+n,p1),1-smooth(.93+n,1.07+n,p2),1-smooth(.90+n,1.05+n,p3));
   if(x<-.22&&z<-.92) b=Math.max(b,(1-smooth(.63,.68,y))*smooth(.28,.34,y));
-  if(z>.69&&y>1.70){
+  if(z>.34&&y>1.70){
    const boundary=1.99-.17*smooth(.15,.51,a)-.16*(1-smooth(.87,1.30,z));
    const cap=smooth(boundary-.016+n,boundary+.016+n,y);
-   const width=Math.max(.006,.135-(y-2.06)*.28);
+   const width=Math.max(.006,.110-(y-2.06)*.28);
    const blaze=(1-smooth(width-.01+n*.18,width+.01+n*.18,a))*smooth(1.24,1.40,z);
    b=cap*(1-blaze);
   }
@@ -31,18 +31,19 @@ function smin(a,b,k){const h=clamp(.5+.5*(b-a)/k);return b+(a-b)*h-k*h*(1-h);}
 function capsule(p,a,b,ra,rb){const ba=b.clone().sub(a),pa=p.clone().sub(a);const h=clamp(pa.dot(ba)/ba.lengthSq());return pa.addScaledVector(ba,-h).length()-THREE.MathUtils.lerp(ra,rb,h);}
 function bodyGeometry(res=112){
  const shapes=[
- [[0,1.22,-.14],[.54,.55,1.12],.14],[[0,1.23,-.97],[.49,.54,.49],.16],
- [[0,1.30,.64],[.535,.59,.49],.16],[[0,1.69,.84],[.435,.48,.40],.14],
+ [[0,1.32,-.14],[.54,.55,1.12],.14],[[0,1.33,-.97],[.49,.54,.49],.16],
+ [[0,1.39,.64],[.535,.59,.49],.16],[[0,1.73,.84],[.435,.48,.40],.14],
  [[0,2.075,1.015],[.548,.490,.452],.14],
  [[-.285,1.962,1.197],[.279,.255,.246],.09],[[.285,1.962,1.197],[.279,.255,.246],.09],
  [[-.118,1.924,1.443],[.169,.140,.140],.035],[[.118,1.924,1.443],[.169,.140,.140],.035],
- [[0,1.796,1.385],[.220,.098,.139],.04]
+ [[0,1.796,1.385],[.220,.098,.139],.04],[[.236,2.286,1.363],[.148,.045,.071],.026],[[-.236,2.286,1.363],[.148,.045,.071],.026]
  ];
  for(const s of [-1,1]){
-  const x=s*.326;
-  shapes.push([[x,1.015,.650],[.179,.408,.211],.085],[[x,.577,.756],[.117,.319,.136],.065],[[x,.272,.805],[.110,.216,.120],.050],[[x,.116,.905],[.153,.113,.216],.033]);
+  const x=s*.326,fd=s===-1?-.09:0;
+  shapes.push([[x,1.015,.650+fd],[.179,.408,.211],.085],[[x,.577,.756+fd],[.117,.319,.136],.065],[[x,.272,.805+fd],[.110,.216,.120],.050],[[x,.116,.905+fd],[.153,.113,.216],.033]);
+  for(const offset of[-.095,-.032,.032,.095])shapes.push([[x+offset,.068,1.056+fd],[.044,.062,.09],.016]);
   const dz=s===-1?.07:-.035;
-  shapes.push([[s*.357,1.040,-.942+dz],[.222,.370,.297],.14],[[s*.36,.718,-.809+dz],[.167,.235,.192],.075],[[s*.369,.480,-1.017+dz],[.116,.206,.181],.07],[[s*.373,.261,-1.151+dz],[.097,.213,.121],.055],[[s*.376,.104,-1.049+dz],[.140,.103,.209],.033]);
+  shapes.push([[s*.357,1.120,-.942+dz],[.222,.370,.297],.14],[[s*.36,.718,-.809+dz],[.167,.235,.192],.075],[[s*.369,.480,-1.017+dz],[.116,.206,.181],.07],[[s*.373,.261,-1.151+dz],[.097,.213,.121],.055],[[s*.376,.104,-1.049+dz],[.140,.103,.209],.033]);
  }
  const lo=V(-.80,-.06,-1.57),range=V(1.60,2.76,3.37);
  const mc=new MarchingCubes(res,new THREE.MeshStandardMaterial(),false,false,320000);mc.isolation=0;
@@ -72,7 +73,7 @@ function sweep(points,radii,steps=64,sides=12){
 }
 function earGeometry(sign){
  const g=new THREE.SphereGeometry(1,48,30),p=g.attributes.position;
- for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);p.setXYZ(i,sign*.405+x*.190+sign*.035*Math.max(0,z),2.480+y*.105-.045*Math.max(0,z)+.008*x,1.030+z*.170);}
+ for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);p.setXYZ(i,sign*.405+x*.190+sign*.035*Math.max(0,z),2.480+y*.105-.045*Math.max(0,z)-.080*sign*x,1.030+z*.170);}
  g.computeVertexNormals();return g;
 }
 function colored(g,kind){const p=g.attributes.position,c=new Float32Array(p.count*3);for(let i=0;i<p.count;i++)coat(V(p.getX(i),p.getY(i),p.getZ(i)),kind).toArray(c,i*3);g.setAttribute('color',new THREE.BufferAttribute(c,3));return g;}
@@ -87,18 +88,18 @@ function fur(geometry,count,kind='body'){
  const sample=surfaceSampler(geometry),p=[],norm=[],color=[],uv=[];
  for(let i=0;i<count;i++){
   const [o,n]=sample();if(o.y<.075)continue;
-  if(kind==='body'&&o.z>1.33&&o.y>2.03&&o.y<2.30&&Math.abs(Math.abs(o.x)-.23)<.142)continue;
+  if(kind==='body'&&o.z>1.33&&o.y>2.06&&o.y<2.27&&Math.abs(Math.abs(o.x)-.23)<.110)continue;
   let len=(.028+rng()*.030),dir=V(0,-.45,-.70);
   if(o.y>1.78&&o.z>.7){len*=.72;dir.set(o.x*.8,-.3,-.05);}
   if(o.y>1.0&&o.z>.42&&o.y<1.85)len*=1.25;
   if(kind==='tail'){len=.040+rng()*.040;dir.set(0,.35,.23);}
   if(kind==='ear'){len=.011+rng()*.021;dir.set(o.x*.7,0,.8);}
-  const tangent=dir.addScaledVector(n,-dir.dot(n)).normalize();const flow=n.clone().multiplyScalar(.60).addScaledVector(tangent,.80).normalize();
+  const tangent=dir.addScaledVector(n,-dir.dot(n)).normalize();const flow=n.clone().multiplyScalar(.36).addScaledVector(tangent,.94).normalize();
   const side=V().crossVectors(n,flow).normalize();if(side.lengthSq()<.2)side.set(1,0,0);
-  const width=(.00075+rng()*.00085)*(kind==='tail'?1.2:1);const col=coat(o,kind).multiplyScalar(.70+rng()*.52);
-  const wiggle=(rng()-.5)*.015,root=o.clone().addScaledVector(n,.0015),mid=root.clone().addScaledVector(flow,len*.50).addScaledVector(n,len*.12),tip=root.clone().addScaledVector(flow,len).addScaledVector(tangent,len*.20).addScaledVector(side,wiggle*.25);
+  const width=(.00075+rng()*.00085)*(kind==='tail'?1.2:1);const col=coat(o,kind).multiplyScalar(.52+rng()*.44);
+  const wiggle=(rng()-.5)*.015,root=o.clone().addScaledVector(n,.0015),mid=root.clone().addScaledVector(flow,len*.50).addScaledVector(n,len*.075),tip=root.clone().addScaledVector(flow,len).addScaledVector(tangent,len*.20).addScaledVector(side,wiggle*.25);
   const verts=[root.clone().addScaledVector(side,-width),root.clone().addScaledVector(side,width),mid.clone().addScaledVector(side,-width*.48),mid.clone().addScaledVector(side,width*.48),tip];
-  for(const k of[0,1,2,1,3,2,2,3,4]){const v=verts[k];p.push(v.x,v.y,v.z);norm.push(n.x,n.y,n.z);const shade=k===4?1.09:1; color.push(col.r*shade,col.g*shade,col.b*shade);uv.push(k%2,k<2?0:k<4?.5:1);}
+  for(const k of[0,1,2,1,3,2,2,3,4]){const v=verts[k];p.push(v.x,v.y,v.z);norm.push(n.x,n.y,n.z);const shade=k===4?1.40:k<2?.65:1.12; color.push(col.r*shade,col.g*shade,col.b*shade);uv.push(k%2,k<2?0:k<4?.5:1);}
  }
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(norm,3));g.setAttribute('color',new THREE.Float32BufferAttribute(color,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
  const m=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.98,side:THREE.DoubleSide});const mesh=new THREE.Mesh(g,m);mesh.name=`Procedural ${kind} fur`;mesh.castShadow=false;mesh.receiveShadow=true;return mesh;
@@ -107,25 +108,28 @@ function irisTexture(){
  const canvas=document.createElement('canvas');canvas.width=canvas.height=512;const c=canvas.getContext('2d'),rnd=random(482);c.fillStyle='#443817';c.fillRect(0,0,512,512);
  const grad=c.createRadialGradient(256,256,20,256,256,250);grad.addColorStop(0,'#b5a75b');grad.addColorStop(.34,'#b29b3a');grad.addColorStop(.65,'#cfb952');grad.addColorStop(.85,'#d5bb56');grad.addColorStop(.96,'#687344');grad.addColorStop(1,'#202a22');c.fillStyle=grad;c.beginPath();c.arc(256,256,250,0,Math.PI*2);c.fill();
  for(let i=0;i<2400;i++){const a=rnd()*Math.PI*2,r=50+rnd()*185,l=8+rnd()*67;c.strokeStyle=`rgba(${rnd()>.5?'65,56,20':'237,216,131'},${.08+rnd()*.22})`;c.lineWidth=.4+rnd()*1.1;c.beginPath();c.moveTo(256+Math.cos(a)*r,256+Math.sin(a)*r);c.quadraticCurveTo(256+Math.cos(a+.005)*(r+l*.5),256+Math.sin(a+.005)*(r+l*.5),256+Math.cos(a)*(Math.min(r+l,240)),256+Math.sin(a)*(Math.min(r+l,240)));c.stroke();}
+ const lid=c.createLinearGradient(0,8,0,310);lid.addColorStop(0,'rgba(16,24,12,.62)');lid.addColorStop(.42,'rgba(25,30,11,.20)');lid.addColorStop(1,'rgba(20,26,10,0)');c.fillStyle=lid;c.fillRect(0,0,512,512);
  const t=new THREE.CanvasTexture(canvas);t.colorSpace=THREE.SRGBColorSpace;return t;
 }
 function sphere(group,name,mat,center,scale,detail=40){const o=new THREE.Mesh(new THREE.SphereGeometry(1,detail,Math.ceil(detail*.7)),mat);o.name=name;o.position.set(...center);o.scale.set(...scale);group.add(o);return o;}
 function eye(group,s,texture){
- const e=new THREE.Group();e.name=s<0?'Left gold eye':'Right gold eye';e.position.set(s*.236,2.155,1.338);e.rotation.y=s*.17;group.add(e);
+ const e=new THREE.Group();e.name=s<0?'Left gold eye':'Right gold eye';e.position.set(s*.236,2.155,1.319);e.scale.set(.83,.83,1);e.rotation.y=s*.17;group.add(e);
  const globe=new THREE.MeshPhysicalMaterial({color:'#151b12',roughness:.26,clearcoat:1,clearcoatRoughness:.04});sphere(e,'Eyeball',globe,[0,0,.105],[.139,.145,.030]);
  const irisMat=new THREE.MeshPhysicalMaterial({map:texture,roughness:.30,clearcoat:.85,clearcoatRoughness:.045});
  const p=[],uv=[],ids=[];const seg=80,rows=16,r=.124;
  for(let j=0;j<=rows;j++)for(let i=0;i<=seg;i++){const q=j/rows,a=i/seg*Math.PI*2,x=Math.cos(a)*r*q,y=Math.sin(a)*r*q;p.push(x,y,.121+.023*(1-q*q));uv.push(.5+x/r*.5,.5+y/r*.5);if(j<rows&&i<seg){let k=j*(seg+1)+i;ids.push(k,k+seg+1,k+1,k+1,k+seg+1,k+seg+2);}}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(ids);g.computeVertexNormals();const iris=new THREE.Mesh(g,irisMat);iris.name='Radially striated golden iris';e.add(iris);
+ const cg=g.clone(),cp=cg.attributes.position;for(let i=0;i<cp.count;i++)cp.setZ(i,cp.getZ(i)+.012);cg.computeVertexNormals();const cornea=new THREE.Mesh(cg,new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:.065,transmission:1,thickness:.006,ior:1.34,clearcoat:0,envMapIntensity:.35,depthWrite:false}));cornea.name='Clear corneal surface';e.add(cornea);
+
  const pupil=new THREE.MeshPhysicalMaterial({color:'#030706',roughness:.15,clearcoat:1});sphere(e,'Vertical oval pupil',pupil,[0,0,.145],[.046,.083,.006]);
  const catchlight=new THREE.MeshBasicMaterial({color:'#fffdf2'});sphere(e,'Upper softbox reflection',catchlight,[-.029,.046,.151],[.014,.017,.0025]);sphere(e,'Lower softbox reflection',catchlight,[.040,-.044,.143],[.0035,.005,.002]);
- const rimMat=new THREE.MeshStandardMaterial({color:'#151314',roughness:.69});const points=[];for(let i=0;i<=80;i++){let a=i/80*Math.PI*2;points.push([Math.cos(a)*.132,Math.sin(a)*.137,.116+Math.sin(a)*.004]);}const rim=new THREE.Mesh(sweep(points,Array(9).fill(.0065),80,7),rimMat);rim.name='Soft eyelid rim';e.add(rim);return e;
+ const rimMat=new THREE.MeshStandardMaterial({color:'#151314',roughness:.69});const points=[];for(let i=0;i<=80;i++){let a=i/80*Math.PI*2;points.push([Math.cos(a)*.132,Math.sin(a)*.137,.116+Math.sin(a)*.004]);}const rim=new THREE.Mesh(sweep(points,Array(9).fill(.0045),80,7),rimMat);rim.name='Soft eyelid rim';e.add(rim);return e;
 }
 function nose(group){
  const m=new THREE.MeshPhysicalMaterial({color:'#30262b',roughness:.63,clearcoat:.2});
  const sh=new THREE.Shape();sh.moveTo(-.081,.021);sh.bezierCurveTo(-.088,.043,-.047,.049,0,.036);sh.bezierCurveTo(.047,.049,.088,.043,.081,.021);sh.bezierCurveTo(.054,-.007,.028,-.008,.021,-.049);sh.quadraticCurveTo(0,-.073,-.021,-.049);sh.bezierCurveTo(-.028,-.008,-.054,-.007,-.081,.021);
- const g=new THREE.ExtrudeGeometry(sh,{depth:.028,bevelEnabled:true,bevelSegments:4,steps:1,bevelSize:.008,bevelThickness:.008,curveSegments:18});const n=new THREE.Mesh(g,m);n.name='Sculpted leather nose';n.position.set(0,1.999,1.570);group.add(n);
- const dark=new THREE.MeshStandardMaterial({color:'#160f12',roughness:.85});for(const s of[-1,1])sphere(group,'Nostril',dark,[s*.051,2.016,1.606],[.016,.007,.0026],20);
+ const g=new THREE.ExtrudeGeometry(sh,{depth:.028,bevelEnabled:true,bevelSegments:4,steps:1,bevelSize:.008,bevelThickness:.008,curveSegments:18});const n=new THREE.Mesh(g,m);n.name='Sculpted leather nose';n.scale.set(.80,.76,.80);n.position.set(0,1.999,1.570);group.add(n);
+ const dark=new THREE.MeshStandardMaterial({color:'#160f12',roughness:.85});for(const s of[-1,1])sphere(group,'Nostril',dark,[s*.041,2.012,1.602],[.012,.005,.0026],20);
  const lineMat=new THREE.MeshStandardMaterial({color:'#675854',roughness:.92});
  for(const points of[[[0,1.958,1.588],[0,1.911,1.589],[0,1.886,1.562]],[[-.126,1.872,1.516],[-.066,1.866,1.561],[0,1.886,1.562]],[[.126,1.872,1.516],[.066,1.866,1.561],[0,1.886,1.562]]]){const line=new THREE.Mesh(sweep(points,[.0028,.0035,.0021],22,6),lineMat);line.name='Muzzle contour';group.add(line);}
 }
@@ -138,15 +142,15 @@ function whiskers(group){
 }
 export function buildCat({resolution=112,hairs=120000}={}){
  const root=new THREE.Group();root.name='GPT-6 Astra Pro | ColabDev Web | Bicolor Fold Cat';root.userData={author:'GPT-6 Astra Pro',tools:'ColabDev, Three.js, JavaScript, headless Chromium',source:'Original procedural geometry; reference used only for visual guidance',version:1};
- const furGroup=new THREE.Group();furGroup.name='Procedural fur strands';root.add(furGroup);
- const mat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.95});const bodyG=bodyGeometry(resolution),body=new THREE.Mesh(bodyG,mat);body.name='Continuous anatomical sculpt';body.castShadow=true;body.receiveShadow=true;root.add(body);furGroup.add(fur(bodyG,hairs));
- const tailG=colored(sweep([[0,1.43,-1.37],[-.09,1.66,-1.70],[-.28,1.95,-2.025],[-.54,2.30,-2.215],[-.66,2.78,-2.18]],[.112,.125,.14,.145,.148,.142,.135,.108,.025],92,20),'tail');const tail=new THREE.Mesh(tailG,mat);tail.name='Upright curved tail';tail.castShadow=true;root.add(tail);furGroup.add(fur(tailG,15000,'tail'));
- const tg=new THREE.SphereGeometry(1,32,24);tg.scale(.105,.120,.103);tg.translate(-.657,2.725,-2.18);colored(tg,'tail');const tm=new THREE.Mesh(tg,mat);tm.name='Rounded tail tip';root.add(tm);furGroup.add(fur(tg,4200,'tail'));
+ const furGroup=new THREE.Group();furGroup.name='Procedural fur strands';furGroup.userData.role='fur';root.add(furGroup);
+ const mat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.95});const bodyG=bodyGeometry(resolution),body=new THREE.Mesh(bodyG,mat);body.name='Continuous anatomical sculpt';body.userData.role='body';body.castShadow=true;body.receiveShadow=true;root.add(body);furGroup.add(fur(bodyG,hairs));
+ const tailG=colored(sweep([[0,1.58,-1.37],[-.09,1.66,-1.70],[-.28,1.95,-2.025],[-.65,2.30,-2.215],[-.86,2.72,-2.18]],[.112,.125,.14,.145,.148,.142,.135,.108,.093],92,20),'tail');const tail=new THREE.Mesh(tailG,mat);tail.name='Upright curved tail';tail.castShadow=true;root.add(tail);furGroup.add(fur(tailG,15000,'tail'));
+ const tg=new THREE.SphereGeometry(1,32,24);tg.scale(.105,.120,.103);tg.translate(-.86,2.72,-2.18);colored(tg,'tail');const tm=new THREE.Mesh(tg,mat);tm.name='Rounded tail tip';root.add(tm);furGroup.add(fur(tg,4200,'tail'));
 
  const earMat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.99,side:THREE.DoubleSide});
  for(const s of[-1,1]){const eg=colored(earGeometry(s),'ear'),em=new THREE.Mesh(eg,earMat);em.name='Folded ear cartilage';em.castShadow=true;root.add(em);furGroup.add(fur(eg,3600,'ear'));
  const conchaMat=new THREE.MeshStandardMaterial({color:'#756460',roughness:1,side:THREE.DoubleSide});const concha=sphere(root,'Recessed inner ear',conchaMat,[s*.42,2.442,1.174],[.073,.052,.019]);concha.rotation.z=s*-.5;}
  const texture=irisTexture();eye(root,-1,texture);eye(root,1,texture);nose(root);whiskers(root);
- const toeMat=new THREE.MeshStandardMaterial({color:'#a8a397',roughness:1});for(const s of[-1,1])for(const z of[.905,-1.049+(s===-1?.07:-.035)])for(const off of[-.048,.044]){const x=s*(z>0?.326:.376)+off;const mesh=new THREE.Mesh(sweep([[x,.080,z+.173],[x,.121,z+.175],[x,.164,z+.14]],[.0023,.003,.001],14,5),toeMat);mesh.name='Subtle toe separation';root.add(mesh);}
- root.updateMatrixWorld(true);return {root,furGroup,body,metrics:{hairs:hairs+26400,resolution,seed:1947}};
+ const toeMat=new THREE.MeshStandardMaterial({color:'#a8a397',roughness:1});for(const s of[-1,1])for(const z of[.905+(s===-1?-.09:0),-1.049+(s===-1?.07:-.035)])for(const off of[-.048,.044]){const x=s*(z>0?.326:.376)+off;const mesh=new THREE.Mesh(sweep([[x,.080,z+.173],[x,.121,z+.175],[x,.164,z+.14]],[.0023,.003,.001],14,5),toeMat);mesh.name='Subtle toe separation';root.add(mesh);}
+ root.updateMatrixWorld(true);let triangles=0;root.traverse(o=>{if(o.isMesh)triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;});const metrics={hairs:furGroup.children.reduce((n,o)=>n+o.geometry.attributes.position.count/9,0),triangles,resolution,seed:1947};root.userData.metrics=metrics;return {root,furGroup,body,metrics};
 }
