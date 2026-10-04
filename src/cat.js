@@ -21,7 +21,7 @@ function coat(p,kind='body'){
    const cap=smooth(boundary-.016+n,boundary+.016+n,y);
    const width=Math.max(.006,.110-(y-2.06)*.28);
    const blaze=(1-smooth(width-.01+n*.18,width+.01+n*.18,a))*smooth(1.24,1.40,z);
-   b=cap*(1-blaze);
+   b=cap*(1-blaze);if(z<.69)b*=smooth(1.76,1.94,y); 
   }
  }
  const col=white.clone().lerp(black,b); col.multiplyScalar(.97+noise(x*2,y*2,z*2)*.027);return col;
@@ -32,11 +32,11 @@ function capsule(p,a,b,ra,rb){const ba=b.clone().sub(a),pa=p.clone().sub(a);cons
 function bodyGeometry(res=112){
  const shapes=[
  [[0,1.32,-.14],[.54,.55,1.12],.14],[[0,1.33,-.97],[.49,.54,.49],.16],
- [[0,1.39,.64],[.535,.59,.49],.16],[[0,1.73,.84],[.435,.48,.40],.14],
- [[0,2.075,1.015],[.548,.490,.452],.14],
+ [[0,1.39,.64],[.535,.59,.49],.16],[[0,1.73,.84],[.435,.455,.40],.14],
+ [[0,2.075,1.015],[.548,.467,.452],.14],
  [[-.285,1.962,1.197],[.279,.255,.246],.09],[[.285,1.962,1.197],[.279,.255,.246],.09],
  [[-.118,1.924,1.443],[.169,.140,.140],.035],[[.118,1.924,1.443],[.169,.140,.140],.035],
- [[0,1.796,1.385],[.220,.098,.139],.04],[[.236,2.286,1.363],[.148,.045,.071],.026],[[-.236,2.286,1.363],[.148,.045,.071],.026]
+ [[0,1.796,1.385],[.220,.098,.139],.04]
  ];
  for(const s of [-1,1]){
   const x=s*.326,fd=s===-1?-.09:0;
@@ -73,7 +73,7 @@ function sweep(points,radii,steps=64,sides=12){
 }
 function earGeometry(sign){
  const g=new THREE.SphereGeometry(1,48,30),p=g.attributes.position;
- for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);p.setXYZ(i,sign*.405+x*.190+sign*.035*Math.max(0,z),2.480+y*.105-.045*Math.max(0,z)-.080*sign*x,1.030+z*.170);}
+ for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);p.setXYZ(i,sign*.405+x*.190+sign*.035*Math.max(0,z),2.443+y*.089-.047*Math.max(0,z)-.092*sign*x,1.030+z*.170);}
  g.computeVertexNormals();return g;
 }
 function colored(g,kind){const p=g.attributes.position,c=new Float32Array(p.count*3);for(let i=0;i<p.count;i++)coat(V(p.getX(i),p.getY(i),p.getZ(i)),kind).toArray(c,i*3);g.setAttribute('color',new THREE.BufferAttribute(c,3));return g;}
@@ -96,10 +96,10 @@ function fur(geometry,count,kind='body'){
   if(kind==='ear'){len=.011+rng()*.021;dir.set(o.x*.7,0,.8);}
   const tangent=dir.addScaledVector(n,-dir.dot(n)).normalize();const flow=n.clone().multiplyScalar(.36).addScaledVector(tangent,.94).normalize();
   const side=V().crossVectors(n,flow).normalize();if(side.lengthSq()<.2)side.set(1,0,0);
-  const width=(.00075+rng()*.00085)*(kind==='tail'?1.2:1);const col=coat(o,kind).multiplyScalar(.52+rng()*.44);
+  const width=(.00062+rng()*.00064)*(kind==='tail'?1.2:1);const col=coat(o,kind).multiplyScalar(.77+rng()*.24);
   const wiggle=(rng()-.5)*.015,root=o.clone().addScaledVector(n,.0015),mid=root.clone().addScaledVector(flow,len*.50).addScaledVector(n,len*.075),tip=root.clone().addScaledVector(flow,len).addScaledVector(tangent,len*.20).addScaledVector(side,wiggle*.25);
   const verts=[root.clone().addScaledVector(side,-width),root.clone().addScaledVector(side,width),mid.clone().addScaledVector(side,-width*.48),mid.clone().addScaledVector(side,width*.48),tip];
-  for(const k of[0,1,2,1,3,2,2,3,4]){const v=verts[k];p.push(v.x,v.y,v.z);norm.push(n.x,n.y,n.z);const shade=k===4?1.40:k<2?.65:1.12; color.push(col.r*shade,col.g*shade,col.b*shade);uv.push(k%2,k<2?0:k<4?.5:1);}
+  for(const k of[0,1,2,1,3,2,2,3,4]){const v=verts[k];p.push(v.x,v.y,v.z);norm.push(n.x,n.y,n.z);const shade=k===4?1.16:k<2?.87:1.04; color.push(col.r*shade,col.g*shade,col.b*shade);uv.push(k%2,k<2?0:k<4?.5:1);}
  }
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(norm,3));g.setAttribute('color',new THREE.Float32BufferAttribute(color,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
  const m=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.98,side:THREE.DoubleSide});const mesh=new THREE.Mesh(g,m);mesh.name=`Procedural ${kind} fur`;mesh.castShadow=false;mesh.receiveShadow=true;return mesh;
@@ -119,7 +119,7 @@ function eye(group,s,texture){
  const p=[],uv=[],ids=[];const seg=80,rows=16,r=.124;
  for(let j=0;j<=rows;j++)for(let i=0;i<=seg;i++){const q=j/rows,a=i/seg*Math.PI*2,x=Math.cos(a)*r*q,y=Math.sin(a)*r*q;p.push(x,y,.121+.023*(1-q*q));uv.push(.5+x/r*.5,.5+y/r*.5);if(j<rows&&i<seg){let k=j*(seg+1)+i;ids.push(k,k+seg+1,k+1,k+1,k+seg+1,k+seg+2);}}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(ids);g.computeVertexNormals();const iris=new THREE.Mesh(g,irisMat);iris.name='Radially striated golden iris';e.add(iris);
- const cg=g.clone(),cp=cg.attributes.position;for(let i=0;i<cp.count;i++)cp.setZ(i,cp.getZ(i)+.012);cg.computeVertexNormals();const cornea=new THREE.Mesh(cg,new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:.065,transmission:1,thickness:.006,ior:1.34,clearcoat:0,envMapIntensity:.35,depthWrite:false}));cornea.name='Clear corneal surface';e.add(cornea);
+ const cg=g.clone(),cp=cg.attributes.position;for(let i=0;i<cp.count;i++)cp.setZ(i,cp.getZ(i)+.012);cg.computeVertexNormals();const cornea=new THREE.Mesh(cg,new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:.10,transparent:true,opacity:.055,clearcoat:.12,envMapIntensity:.25,depthWrite:false}));cornea.name='Clear corneal surface';e.add(cornea);
 
  const pupil=new THREE.MeshPhysicalMaterial({color:'#030706',roughness:.15,clearcoat:1});sphere(e,'Vertical oval pupil',pupil,[0,0,.145],[.046,.083,.006]);
  const catchlight=new THREE.MeshBasicMaterial({color:'#fffdf2'});sphere(e,'Upper softbox reflection',catchlight,[-.029,.046,.151],[.014,.017,.0025]);sphere(e,'Lower softbox reflection',catchlight,[.040,-.044,.143],[.0035,.005,.002]);
@@ -149,7 +149,7 @@ export function buildCat({resolution=112,hairs=120000}={}){
 
  const earMat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.99,side:THREE.DoubleSide});
  for(const s of[-1,1]){const eg=colored(earGeometry(s),'ear'),em=new THREE.Mesh(eg,earMat);em.name='Folded ear cartilage';em.castShadow=true;root.add(em);furGroup.add(fur(eg,3600,'ear'));
- const conchaMat=new THREE.MeshStandardMaterial({color:'#756460',roughness:1,side:THREE.DoubleSide});const concha=sphere(root,'Recessed inner ear',conchaMat,[s*.42,2.442,1.174],[.073,.052,.019]);concha.rotation.z=s*-.5;}
+ const conchaMat=new THREE.MeshStandardMaterial({color:'#756460',roughness:1,side:THREE.DoubleSide});const concha=sphere(root,'Recessed inner ear',conchaMat,[s*.42,2.412,1.174],[.073,.048,.019]);concha.rotation.z=s*-.5;}
  const texture=irisTexture();eye(root,-1,texture);eye(root,1,texture);nose(root);whiskers(root);
  const toeMat=new THREE.MeshStandardMaterial({color:'#a8a397',roughness:1});for(const s of[-1,1])for(const z of[.905+(s===-1?-.09:0),-1.049+(s===-1?.07:-.035)])for(const off of[-.048,.044]){const x=s*(z>0?.326:.376)+off;const mesh=new THREE.Mesh(sweep([[x,.080,z+.173],[x,.121,z+.175],[x,.164,z+.14]],[.0023,.003,.001],14,5),toeMat);mesh.name='Subtle toe separation';root.add(mesh);}
  root.updateMatrixWorld(true);let triangles=0;root.traverse(o=>{if(o.isMesh)triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;});const metrics={hairs:furGroup.children.reduce((n,o)=>n+o.geometry.attributes.position.count/9,0),triangles,resolution,seed:1947};root.userData.metrics=metrics;return {root,furGroup,body,metrics};
