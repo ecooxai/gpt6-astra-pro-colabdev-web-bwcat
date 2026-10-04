@@ -1,10 +1,500 @@
 {
-  "revision": "2026-10-04T12:28:36.908640+00:00",
-  "iterations": 11,
-  "score": 88.0,
+  "revision": "2026-10-04T13:17:39.724891+00:00",
+  "iterations": 21,
+  "score": 91.0,
   "projectPath": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat",
-  "note": "Review 11: 88/100. The original cat loads from its own compressed asset; all 12 browser checks pass, including re-import and export. The separate 20,000-case numerical suite passes after fixing narrow-viewport framing. Visual fidelity has not been promoted on the basis of these technical tests. Scores are subjective visual assessments, not measured reference similarity.",
+  "note": "Review 21: 91/100. The actual orbital mounds are removed, the paws are shorter and more upright, and the black patches wrap across the dorsal body. The finer coat is retained. Rounded ear boundaries and subtle black-fiber highlights are still needed. Scores are subjective visual assessments, not measured reference similarity.",
   "reviews": [
+    {
+      "iteration": 21,
+      "title": "21 \u00b7 Verified anatomy and continuous coat",
+      "score": 91.0,
+      "image": "process/iteration-21-three.png",
+      "note": "The actual orbital mounds are removed, the paws are shorter and more upright, and the black patches wrap across the dorsal body. The finer coat is retained. Rounded ear boundaries and subtle black-fiber highlights are still needed.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-21-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-21-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-21-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-21-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-21-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-21-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-21-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-21-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-21-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-21-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-21-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-21-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-21-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-21-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-21-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-21.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-21.json"
+      }
+    },
+    {
+      "iteration": 20,
+      "title": "20 \u00b7 Anatomy patch verification: unchanged sculpt",
+      "score": 88.0,
+      "image": "process/iteration-20-three.png",
+      "note": "The browser run passed, but source verification showed the planned anatomical replacement had not applied. The unchanged geometry is not credited as progress; the next pass replaces the exact verified source blocks.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-20-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-20-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-20-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-20-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-20-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-20-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-20-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-20-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-20-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-20-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-20-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-20-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-20-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-20-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-20-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-20.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-20.json"
+      }
+    },
+    {
+      "iteration": 19,
+      "title": "19 \u00b7 Facial proportion study: orbital rims rejected",
+      "score": 88.0,
+      "image": "process/iteration-19-three.png",
+      "note": "The profile view exposed oversized paws and bulky orbital rims that obscure the gold eyes from the side. The rear view also shows an artificial white separation across the rump. These shortcomings are recorded rather than hidden by the frontal render.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-19-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-19-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-19-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-19-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-19-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-19-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-19-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-19-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-19-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-19-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-19-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-19-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-19-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-19-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-19-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-19.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-19.json"
+      }
+    },
+    {
+      "iteration": 18,
+      "title": "18 \u00b7 Softer folded rims and broad studio lighting",
+      "score": 91.0,
+      "image": "process/iteration-18-three.png",
+      "note": "The softer fold silhouette and broader light setup reveal more natural coat shading. The remaining differences are concentrated in forehead height, nose-to-eye spacing and profile visibility of the eyes; those require a facial sculpt pass rather than a higher score.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-18-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-18-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-18-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-18-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-18-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-18-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-18-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-18-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-18-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-18-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-18-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-18-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-18-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-18-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-18-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-18.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-18.json"
+      }
+    },
+    {
+      "iteration": 17,
+      "title": "17 \u00b7 Closed cupped-ear geometry",
+      "score": 89.0,
+      "image": "process/iteration-17-three.png",
+      "note": "The ears now have continuous closed cartilage, recessed color and fine inner hairs, but their outer rims remain too angular relative to the reference. The softer coat is retained; the angularity prevents a higher visual score.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-17-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-17-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-17-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-17-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-17-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-17-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-17-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-17-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-17-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-17-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-17-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-17-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-17-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-17-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-17-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-17.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-17.json"
+      }
+    },
+    {
+      "iteration": 16,
+      "title": "16 \u00b7 Portable fine-fiber coat restored",
+      "score": 90.0,
+      "image": "process/iteration-16-three.png",
+      "note": "Conventional alpha blending restores the fine coat and gives softer, less bristly fur at normal viewing distance. The material uses the same blending model in the web viewer and GLB. The outer ear shape remains the next major reference difference.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-16-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-16-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-16-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-16-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-16-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-16-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-16-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-16-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-16-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-16-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-16-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-16-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-16-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-16-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-16-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-16.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-16.json"
+      }
+    },
+    {
+      "iteration": 15,
+      "title": "15 \u00b7 Coverage fallback: still not accepted",
+      "score": 75.0,
+      "image": "process/iteration-15-three.png",
+      "note": "The multisample coverage variant still fails to show the coat reliably in the headless renderer. It is rejected; the next pass uses conventional alpha blending so the web viewer and exported material use the same portable behavior.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-15-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-15-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-15-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-15-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-15-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-15-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-15-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-15-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-15-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-15-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-15-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-15-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-15-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-15-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-15-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-15.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-15.json"
+      }
+    },
+    {
+      "iteration": 14,
+      "title": "14 \u00b7 Fine-fiber material: rejected cutoff behavior",
+      "score": 75.0,
+      "image": "process/iteration-14-three.png",
+      "note": "The authored fiber texture is original, but its first cutoff setting removes most fur at normal viewing distance. This render is a visible regression, not an improvement, and is not the accepted release candidate.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-14-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-14-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-14-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-14-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-14-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-14-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-14-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-14-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-14-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-14-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-14-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-14-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-14-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-14-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-14-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-14.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-14.json"
+      }
+    },
+    {
+      "iteration": 13,
+      "title": "13 \u00b7 Cupped ear interiors and a finer facial groom",
+      "score": 89.0,
+      "image": "process/iteration-13-three.png",
+      "note": "The ear interiors now contain original recessed geometry and individually swept fine hairs. The muzzle groom is shorter and the chin is narrower. Coarse strand appearance remains the main visual limitation.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-13-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-13-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-13-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-13-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-13-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-13-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-13-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-13-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-13-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-13-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-13-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-13-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-13-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-13-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-13-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-13.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-13.json"
+      }
+    },
+    {
+      "iteration": 12,
+      "title": "12 \u00b7 Refined eye scale and narrower chin",
+      "score": 88.0,
+      "image": "process/iteration-12-three.png",
+      "note": "The eyes are closer to the reference proportions and the chin is less pronounced. The ear-interior geometry was not yet connected in this render, so the planned inner-ear detail is not credited.",
+      "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-12-three.png",
+      "captures": [
+        {
+          "view": "three",
+          "image": "process/iteration-12-three.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-12-three.png"
+        },
+        {
+          "view": "front",
+          "image": "process/iteration-12-front.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-12-front.png"
+        },
+        {
+          "view": "left",
+          "image": "process/iteration-12-left.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-12-left.png"
+        },
+        {
+          "view": "right",
+          "image": "process/iteration-12-right.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-12-right.png"
+        },
+        {
+          "view": "back",
+          "image": "process/iteration-12-back.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-12-back.png"
+        },
+        {
+          "view": "desktop",
+          "image": "process/iteration-12-desktop.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-12-desktop.png"
+        },
+        {
+          "view": "mobile",
+          "image": "process/iteration-12-mobile.png",
+          "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/iteration-12-mobile.png"
+        }
+      ],
+      "testReport": {
+        "file": "process/test-12.json",
+        "path": "/home/dev/project/3d/gpt6-astra-pro_colabdev_web_bwcat/public/process/test-12.json"
+      }
+    },
     {
       "iteration": 11,
       "title": "11 \u00b7 Compressed delivery and verified camera fitting",
@@ -463,7 +953,7 @@
       }
     }
   ],
-  "updated": "2026-10-04 12:28 UTC",
+  "updated": "2026-10-04 13:17 UTC",
   "qa": {
     "cases": 20000,
     "passed": 20000,
