@@ -1,0 +1,3 @@
+import {build} from 'esbuild';import fs from 'node:fs/promises';import path from 'node:path';
+export const root=path.resolve(import.meta.dirname,'..');const out='/build/gpt6-astra-pro_colabdev_web_bwcat';
+await fs.mkdir(out+'/assets',{recursive:true});await build({entryPoints:[root+'/src/main.js'],bundle:true,minify:true,sourcemap:true,format:'esm',outdir:out+'/assets',entryNames:'app',target:['es2022'],legalComments:'eof'});await fs.copyFile(root+'/index.html',out+'/index.html');await fs.cp(root+'/public',out,{recursive:true});await fs.rm(root+'/build',{recursive:true,force:true});await fs.symlink(out,root+'/build');console.log('Built '+out);
