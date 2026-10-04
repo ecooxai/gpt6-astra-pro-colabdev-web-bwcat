@@ -1,0 +1,18 @@
+{
+  "ready": true,
+  "file": "./assets/mono.meshopt.glb",
+  "source": "Original model authored by GPT-6 Astra Pro in ColabDev; this is a precomputed copy of src/cat.js, not an imported third-party asset.",
+  "generatorSHA256": "45717c712f47422bed3d46cad5c526004dce7087c4affea907f9e402f436a538",
+  "bytes": {
+    "original": 61508728,
+    "portable": 25069808,
+    "web": 8723588
+  },
+  "geometrySimplified": false,
+  "quantization": {
+    "positionBits": 16,
+    "normalBits": 12,
+    "colorBits": 12,
+    "textureCoordinateBits": 12
+  }
+}
